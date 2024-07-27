@@ -26,7 +26,7 @@ public class GetListSearchNewsQuery : IRequest<GetListResponse<GetListSearchNews
                     var news = await _newsRepository.GetListSearchAsync(
                      indexName: "news",
                      fieldName: "text",
-                     value: request.Value,
+                     value: request.Value.ToLower(),
                      index: request.PageRequest.PageIndex,
                      size: request.PageRequest.PageSize,
                      cancellationToken:cancellationToken

@@ -15,11 +15,12 @@ public class ElasticSearchRepository<TEntity,TEntityId> : IAsyncRepository<TEnti
         _client = new ElasticLowLevelClient(connectionSettings);
     }
 
-    public async Task<Paginate<TEntity>> GetListAsync(string indexName, int index = 0, int size = 10, CancellationToken cancellationToken = default)
+    public async Task<Paginate<TEntity>> GetListAsync(string indexName, int index, int size, CancellationToken cancellationToken = default)
     {
         var searchQuery = new
         {
             from = index * size,
+            size = size,
             query = new
             {
                 match_all = new { }
@@ -52,11 +53,12 @@ public class ElasticSearchRepository<TEntity,TEntityId> : IAsyncRepository<TEnti
         return paginateResult;
     }
 
-    public async Task<Paginate<TEntity>> GetListSearchAsync(string indexName, string fieldName, string value, int index = 0, int size = 10, CancellationToken cancellationToken=default)
+    public async Task<Paginate<TEntity>> GetListSearchAsync(string indexName, string fieldName, string value, int index, int size, CancellationToken cancellationToken=default)
     {
         var searchQuery = new
         {
             from = index * size,
+            size = size,
             query = new
             {
                 wildcard = new Dictionary<string, object>

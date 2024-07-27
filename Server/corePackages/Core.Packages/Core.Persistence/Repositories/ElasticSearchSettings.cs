@@ -2,5 +2,5 @@
 
 public class ElasticSearchSettings
 {
-    public string Uri { get; set; }
+    public string Uri { get; set; } = string.Empty;
 }
