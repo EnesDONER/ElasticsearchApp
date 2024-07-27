@@ -34,7 +34,6 @@ else
             }
         </div>
 
-
         <div class="row mb-3 mt-3 align-items-center">
             <div class="col-md-6 d-flex justify-content-between">
                 <button class="btn btn-secondary" @onclick="PreviousPage" disabled="@(!CanGoToPreviousPage())">Previous</button>
@@ -51,16 +50,13 @@ else
                 <span style="width: 80%;">Total @news.Count Entity</span>
             </div>
         </div>
-
-
-
     </div>
 }
 
 @code {
     Paginate<NewsView> news = new();
     private int pageIndex = 0;
-    private int pageSize = 6; // Default page size
+    private int pageSize = 6;
     private string searchQuery = "";
 
     protected override async Task OnInitializedAsync()
@@ -114,7 +110,7 @@ else
 
     private async Task OnPageSizeChanged()
     {
-        pageIndex = 0; // Reset to first page
-        await GetListSearchNews(searchQuery); // Reload news with new page size
+        pageIndex = 0;
+        await GetListSearchNews(searchQuery);
     }
 }
